@@ -261,7 +261,7 @@ def main():
         try:
             title = "---------------------Student Card---------------------\n    * Dev: Zidane barkat\n------------------------------------------------------"
             print(Fore.RED + title)
-            print(f"""{Fore.BLUE + '\n      * 1- Create account\n'+Fore.GREEN+'\n      * 2- Add info\n'+Fore.YELLOW+'\n      * 3- Admin center\n'+Style.RESET_ALL+Fore.RED+Fore.BLACK+'\n      * 9- Help ( Info about our program )\n'+Style.RESET_ALL+Fore.RED+'\n      * 99- Exit\n'+Fore.CYAN+'\n      * 0- Contact us   -h '+Fore.RED+'(lost get help)'}""")
+            print(f"""{Fore.BLUE + '\n      * 1- Create account\n'+Fore.GREEN+'\n      * 2- Add info\n'+Fore.YELLOW+'\n      * 3- Admin center\n'+Style.RESET_ALL+Fore.RED+Fore.RED+'\n      * 9- Help ( Info about our program )\n'+Style.RESET_ALL+Fore.RED+'\n      * 99- Exit\n'+Fore.CYAN+'\n      * 0- Contact us   -h '+Fore.RED+'(lost get help)'}""")
             user_choice = int(input(Fore.MAGENTA+"\n* Enter your choice as number: "+Style.RESET_ALL))
             
             if user_choice == 1:
