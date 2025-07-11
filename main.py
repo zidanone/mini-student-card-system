@@ -3,7 +3,7 @@ from pyfiglet import Figlet
 from colorama import Fore , Style , init
 import pyfiglet
 import os
-
+import random
 
 
 init(autoreset=True)
@@ -65,26 +65,40 @@ def create_account():
         
         return
 
- 
+def free_admin():
+    
+    
+    ADMIN_USER = ['adminuser','freeadmin','useradmin','admin00']
+    ADMIN_PASS = ['adminfree','admin123','adminadmin','free']
+
+    admin_user = random.choice(ADMIN_USER)
+    admin_pass = random.choice(ADMIN_PASS)
+    return admin_user, admin_pass
+     
 def admin():
     clear_screen()
     print("=============================================\n          Admin Center Side\n=============================================")
     adminuser = input(Fore.RED+"   *   Admin username : ").lower()
-    password = input("   *   Admin password : ").lower()
+    adminpass = input("   *   Admin password : ").lower()
     adminname = input("   *   Admin name please (Your name): ")
-    if adminuser == 'admin' and password == "admin":
-        clear_screen()    
+    
+    # free admin account 
+    
+    adminuser_f = admin_user_f
+    adminpass_f = admin_pass_f
             
             
     
         
-        with open(STUDENTS_ACCOUNTS,'r') as rstudentsaccounts:
-            reader = csv.DictReader(rstudentsaccounts)
-            print(f"==========================================\n       Admin : {adminname}\n==========================================")
-            admin_choice = int(input(Fore.GREEN+"   choice : \n     -1 ) Dispay all users info \n     -2 ) Search for one\n     -3 ) Display all just username are in\n     -9 ) Exit \n\n      - Your choice : "+Style.RESET_ALL))
-        
+    with open(STUDENTS_ACCOUNTS,'r') as rstudentsaccounts:
+        reader = csv.DictReader(rstudentsaccounts)
+        print(f"==========================================\n       Admin : {adminname}\n==========================================")
+        admin_choice = int(input(Fore.GREEN+"   choice : \n     -1 ) Dispay all users info \n     -2 ) Search for one\n     -3 ) Display all just username are in\n     -9 ) Exit \n\n      - Your choice : "+Style.RESET_ALL))
+        if adminuser == 'admin' and adminpass == "admin":
+            clear_screen()     
         
             if admin_choice == 1: 
+                clear_screen()
                 for username in reader:
                     if username:
                         print(f"""-----------------------|* Students Info *|--------------------
@@ -98,9 +112,10 @@ def admin():
                             
                                 """)
                 input("Press Enter key to back ...")
-                
+                clear_screen()
             elif admin_choice == 2:
-                                
+                clear_screen()
+                               
                 admin_search = input(Fore.BLACK+"Enter a username to search: "+Style.RESET_ALL).lower()
 
                 for users in reader:
@@ -116,23 +131,30 @@ def admin():
                                ~ Email : {users["email"]}""")
                         break
                 else:
-                    print("User not found , check for inputs")
+                    input("User not found , check for inputs\nPress Enter to go back ...")
+                    clear_screen()
+                    
             elif admin_choice == 3:
+                clear_screen()
                 for user in reader:
                     print(f"Users: {user["username"]}")
-                print("That's all users in oue program")
-            
+                input("That's all users in oue program\nPress Enter to go back ...")
+                clear_screen
+
             elif admin_choice == 9:
                 clear_screen()
     
             else:
-                print(f"hi {adminname} choice {admin_choice} is invalid")
+                input(f"hi {adminname} choice {admin_choice} is invalid\nPress Enter to go back ...")
                 
             
-    else:
-        print("You'r not admin")
-        input("press Enter key to back ...")
-
+        elif adminuser == adminuser_f and adminpass == adminpass_f:
+            print("You'r login as free admin account , witch mean you can't use admin features ")
+            input("press Enter key to back ...")
+            clear_screen()
+        else:
+            input("Invalid admin account\nPress Enter to go back ..")
+            clear_screen()
 
 
 def students_info():
@@ -201,16 +223,22 @@ def load_accounts():
                 clear_screen()
                 students_info()
                 break
-        else:
-            print("Ivnalid account. Try to create one..")
-            
-    return username
+            else:
+                input("Ivnalid account. Try to create one..\nPress Enter to go back ...")
+                clear_screen()
+                break
+                
+    
                 
                 
 def help():
     clear_screen()
     print("=======================================================\n       HELP Center \n=======================================================")
     userhelp = int(input(f"\n        ^ 1 - Lost access to your account (Password reset)  \n        ^ 2 - Get free admin login account\n\n        * Enter your choice (Numbers only) : "))
+    
+    # free admin account
+    global admin_pass_f ,admin_user_f
+    admin_user_f , admin_pass_f = free_admin()
     
     with open(STUDENTS_ACCOUNTS,'r') as accountsfile:
         
@@ -229,11 +257,11 @@ def help():
                     break
         elif userhelp == 2:
             clear_screen
-            print("""
+            print(f"""
                   =====================================================
                   =                   Admin account                   =
-                  =            + User : Admin                         =
-                  =            + password : Admin                     =
+                  =            + User : {admin_user_f}                  =
+                  =            + password : {admin_pass_f}              =
                   =                                                   =
                   =    NOTE : this free account has no effect         =
                   =====================================================
@@ -261,7 +289,7 @@ def main():
         try:
             title = "---------------------Student Card---------------------\n    * Dev: Zidane barkat\n------------------------------------------------------"
             print(Fore.RED + title)
-            print(f"""{Fore.BLUE + '\n      * 1- Create account\n'+Fore.GREEN+'\n      * 2- Add info\n'+Fore.YELLOW+'\n      * 3- Admin center\n'+Style.RESET_ALL+Fore.RED+Fore.RED+'\n      * 9- Help ( Info about our program )\n'+Style.RESET_ALL+Fore.RED+'\n      * 99- Exit\n'+Fore.CYAN+'\n      * 0- Contact us   -h '+Fore.RED+'(lost get help)'}""")
+            print(f"""{Fore.BLUE + '\n      * 1- Create account\n'+Fore.GREEN+'\n      * 2- Add info\n'+Fore.YELLOW+'\n      * 3- Admin center\n'+Style.RESET_ALL+Fore.RED+Fore.BLACK+'\n      * 9- Help ( Info about our program )\n'+Style.RESET_ALL+Fore.RED+'\n      * 99- Exit\n'+Fore.CYAN+'\n      * 0- Contact us   -h '+Fore.RED+'(lost get help)'}""")
             user_choice = int(input(Fore.MAGENTA+"\n* Enter your choice as number: "+Style.RESET_ALL))
             
             if user_choice == 1:

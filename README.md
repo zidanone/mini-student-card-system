@@ -29,7 +29,7 @@ A terminal-based Python application for managing student accounts, built by **Zi
 
 ```bash
 # Clone the repo
-git clone https://github.com/zidanone/mini-student-card-system.git
+git https://github.com/zidanone/mini-student-card-system.git
 cd mini-student-card-system
 
 # Install dependencies
